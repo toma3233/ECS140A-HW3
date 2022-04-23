@@ -1,3 +1,12 @@
+extern crate custom_error;
+use custom_error::custom_error;
+
+custom_error!{InvalidSyntaxError
+    Bad{pos:i32} = "Syntax error at character position {pos}"
+}
+
+
+
 struct SimpleParser {
     input: String,
     char_pos: i32,
@@ -30,7 +39,7 @@ impl SimpleParser {
                 println!("Syntax error at character position {}", self.char_pos);
                 return;
             } else {
-                self.fun_x();
+                // self.fun_x();
             }
         } else if letter == 'b' {
             if self.char_pos == self.input_len - 1 {
@@ -38,36 +47,37 @@ impl SimpleParser {
                 return;
             } else {
                 self.char_pos += 1;
-                self.fun_x();
+                // self.fun_x();
             }
-        } else {
-            self.fun_x();
+        } 
+        
+        match self.fun_x() {
+            Ok(_) => println!("Input is valid"),
+            Err(e) => println!("{}", e)
         }
-
     }
 
-    fn fun_x(&mut self) {
+    fn fun_x(&mut self) -> Result<(), InvalidSyntaxError> {
         let  letter:char = self.input.chars().nth(self.char_pos as usize).unwrap();
         if letter == 'c' || letter == 'd' {
             if self.char_pos == self.input_len - 1 {
-                println!("Input is valid");
-                return;
+                return Ok(());
             } else {
                 self.char_pos += 1;
-                println!("Syntax error at character position {}", self.char_pos);
-                return;
+                return Err(InvalidSyntaxError::Bad{pos: self.char_pos});
             }
-            
         } else {
-            println!("Syntax error at character position {}", self.char_pos);
-            return;
+            return Err(InvalidSyntaxError::Bad{pos: self.char_pos});
         }
     }
 }
 
 
 fn main() {
-    let input = "aaaa";
-    let mut sp = SimpleParser::new(input);
-    sp.fun_s();
+    let input: [&str; 6] = ["bc", "acd", "aaad", "c", "3yz", ""];
+    for i in 0..6 {
+        let mut sp = SimpleParser::new(&input[i]);
+        sp.fun_s();
+    }
+    
 }
