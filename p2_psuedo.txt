@@ -1,0 +1,22 @@
+class SimpleParser:
+    constructor (accepts input string):
+        input = input string
+        char_pos = 0
+
+    def fun_s():
+        try block:
+            check for empty string, raise exception if it is
+            if letter is a, we need to call fun_x()
+            else if letter is b, we need to increment char_pos and call fun_x()
+            else we call fun_x
+        catch all errors
+
+    def fun_x():
+        if current char is a c or d:
+            if we are at the end of the string:
+                input is valid
+            else 
+                increment char_pos
+                raise exception
+        else:
+            raise exception
