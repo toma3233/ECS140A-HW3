@@ -5,10 +5,12 @@ class SimpleParser:
 
     def fun_s(self):
         try:
+            # if input is empty string
             if len(self.input) == 0:
                 raise Exception("Syntax error at character position " + str(self.char_pos)) 
             letter = self.input[self.char_pos]
             if letter == 'a':
+                # loop through repreated As
                 while letter == 'a' and self.char_pos < len(self.input):
                     letter = self.input[self.char_pos]
                     self.char_pos += 1
@@ -32,12 +34,14 @@ class SimpleParser:
 
     def fun_x(self):
         if (self.input[self.char_pos] == 'c' or self.input[self.char_pos] == 'd'):
+            # If exception not prev thrown and input ends with c or d, it is valid
             if self.char_pos == len(self.input) - 1:
                 print("Input is valid")
             else:
-                # acd
+                # If there are more letters after c/d (acd)
                 self.char_pos += 1
                 raise Exception("Syntax error at character position " + str(self.char_pos)) 
+        # any char other than c or d         
         else:
             raise Exception("Syntax error at character position " + str(self.char_pos))
 
@@ -55,3 +59,14 @@ for input in test.keys():
     print("Should be: " +  test[input])
     sp.fun_s()
     print()
+
+
+
+
+
+
+
+
+
+
+
