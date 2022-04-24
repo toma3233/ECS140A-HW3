@@ -39,7 +39,7 @@ class SimpleParser:
                 self.char_pos += 1
                 raise Exception("Syntax error at character position " + str(self.char_pos)) 
         else:
-            raise Exception("Syntax error at character position " + str(self.char_pos)) 
+            raise Exception("Syntax error at character position " + str(self.char_pos))
 
 test = {
     "bc": "Input is valid", 
@@ -54,5 +54,4 @@ for input in test.keys():
     sp = SimpleParser(input)
     print("Should be: " +  test[input])
     sp.fun_s()
-    print()
     print()
